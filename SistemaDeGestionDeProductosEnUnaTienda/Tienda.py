@@ -21,3 +21,11 @@ class Tienda:
                 return True
         # return False
         raise ValueError("Producto no encontrado") # punto 2
+    
+    #punto 3
+    def aplicar_descuento(self, nombre, porcentaje):
+        producto = self.buscar_producto(nombre)
+
+        nuevo_precio = producto.precio * (1 - porcentaje / 100)
+
+        producto.actualizar_precio(nuevo_precio)
