@@ -1,8 +1,14 @@
-
 class Producto:
     def __init__(self, nombre, precio, categoria):
         self.nombre = nombre
         self.precio = precio
         self.categoria = categoria
+    
+    # punto 2
+    def actualizar_precio(self, nuevo_precio):
+        if nuevo_precio < 0:
+            raise ValueError("El precio no puede ser negativo")
+
+        self.precio = nuevo_precio
 
     

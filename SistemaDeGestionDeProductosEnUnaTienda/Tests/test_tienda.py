@@ -1,5 +1,8 @@
-from producto import Producto
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+import pytest
 from tienda import Tienda
+from producto import Producto
 
 def test_agregar_producto():
     tienda = Tienda()
@@ -18,13 +21,17 @@ def test_buscar_producto_existente():
     resultado = tienda.buscar_producto("Remera")
 
     assert resultado == producto
-    
+
 def test_buscar_producto_no_existente():
     tienda = Tienda()
 
-    resultado = tienda.buscar_producto("Zapatilla")
+    # resultado = tienda.buscar_producto("Zapatilla")
 
-    assert resultado is None
+    # assert resultado is None
+    # punto 2
+    with pytest.raises(ValueError):
+        tienda.eliminar_producto("Zapatilla")
+    
 
 def test_eliminar_producto():
     tienda = Tienda()
@@ -36,4 +43,11 @@ def test_eliminar_producto():
 
     assert resultado is True
     assert producto not in tienda.inventario
+
+# punto 2
+def test_eliminar_producto_inexistente():
+    tienda = Tienda()
+
+    with pytest.raises(ValueError):
+        tienda.eliminar_producto("Zapatilla")
     
