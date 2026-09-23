@@ -81,11 +81,7 @@ def tienda_con_productos():
 # ==========================================================
 
 def test_agregar_producto(tienda_con_productos):
-    nuevo_producto = Producto(
-        "Campera",
-        40000,
-        "Indumentaria"
-    )
+    nuevo_producto = Producto("Campera",40000,"Indumentaria")
 
     tienda_con_productos.agregar_producto(nuevo_producto)
 
@@ -121,11 +117,7 @@ def test_buscar_producto_no_existente():
 def test_eliminar_producto():
     tienda = Tienda()
 
-    producto = Producto(
-        "Remera",
-        10000,
-        "Indumentaria"
-    )
+    producto = Producto("Remera",10000,"Indumentaria")
 
     tienda.agregar_producto(producto)
 
@@ -163,6 +155,24 @@ def test_aplicar_descuento():
     tienda.aplicar_descuento("Remera", 20)
 
     producto_mock.actualizar_precio.assert_called_once_with(8000)
+
+# ==========================================================
+# PUNTO 5 - PRUEBA DE INTEGRACIÓN
+# ==========================================================
+    
+def test_calcular_total_carrito_con_descuento(tienda_con_productos):
+
+    tienda_con_productos.aplicar_descuento("Remera", 20)
+
+    carrito = [
+        "Remera",
+        "Pantalon",
+        "Zapatillas"
+    ]
+
+    total = tienda_con_productos.calcular_total_carrito(carrito)
+
+    assert total == 58000
     
     
     

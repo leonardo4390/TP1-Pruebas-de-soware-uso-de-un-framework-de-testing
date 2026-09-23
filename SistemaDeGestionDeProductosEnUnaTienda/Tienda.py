@@ -20,12 +20,29 @@ class Tienda:
                 self.inventario.remove(producto)
                 return True
         # return False
-        raise ValueError("Producto no encontrado") # punto 2
+    # ==========================================================
+    # PUNTO 2
+    # ==========================================================
+        raise ValueError("Producto no encontrado")
     
-    #punto 3
+    # ==========================================================
+    # PUNTO 3 - FIXTURE
+    # ==========================================================
     def aplicar_descuento(self, nombre, porcentaje):
         producto = self.buscar_producto(nombre)
 
         nuevo_precio = producto.precio * (1 - porcentaje / 100)
 
         producto.actualizar_precio(nuevo_precio)
+    
+    # ==========================================================
+    # PUNTO 5 - CALCULAR TOTAL
+    # ==========================================================
+    def calcular_total_carrito(self, carrito):
+        total = 0
+
+        for nombre_producto in carrito:
+            producto = self.buscar_producto(nombre_producto)
+            total += producto.precio
+
+        return total
